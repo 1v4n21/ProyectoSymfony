@@ -37,7 +37,28 @@
 </head>
 
 <body>
-    <header>Iván Martínez Sánchez</header>
+    {% for flashMessage in app.flashes('success') %}
+    <div id="flash-message" class="alert alert-success text-center">
+        {{ flashMessage }}
+    </div>
+
+    <script>
+        // Después de 7 segundos, ocultar el mensaje
+        setTimeout(function () {
+            document.getElementById('flash-message').style.display = 'none';
+        }, 7000);
+    </script>
+    {% endfor %}
+
+    <header>
+        {% if app.user %}
+            {{ app.user.nombre }}
+            <img src="{{ app.user.foto }}" alt="Imagen">
+        {% else %}
+            INCIDENCIAS
+        {% endif %}
+    </header>
+    
     {% block body %}{% endblock %}
 </body>
 

@@ -1,19 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Registro{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Registro</h1>
 
-    {{ form_errors(registrationForm) }}
+                {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.foto) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                {{ form_start(registrationForm) }}
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.nombre, {'attr': {'class': 'form-control', 'placeholder': 'Nombre'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.apellidos, {'attr': {'class': 'form-control', 'placeholder': 'Apellidos'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.telefono, {'attr': {'class': 'form-control', 'placeholder': 'Teléfono'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.foto, {'attr': {'class': 'form-control', 'placeholder': 'URL de la foto'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.plainPassword, {'label': 'Password', 'attr': {'class': 'form-control', 'type': 'password', 'placeholder': 'Contraseña'}}) }}
+                    </div>                    
+
+                    <div class="form-check mb-3">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                        {{ form_label(registrationForm.agreeTerms, 'Acepto los términos y condiciones', {'label_attr': {'class': 'form-check-label'}}) }}
+                    </div>                    
+
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                {{ form_end(registrationForm) }}
+
+                <p class="mt-3 text-center">
+                    <small>¿Ya tienes una cuenta? <a href="{{ path('app_login') }}">Inicia sesión</a></small>
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+

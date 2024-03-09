@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -35,15 +37,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\NotBlank(message: "La contraseña es obligatoria.")]
-    #[Assert\Length(min: 4, minMessage: "La contraseña debe tener al menos 4 caracteres.")]
     private ?string $password = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "El teléfono es obligatorio.")]
     private ?int $telefono = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "La imagen es obligatoria.")]
     private ?string $foto = null;
 
     /**
@@ -51,6 +52,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private array $roles = [];
+
+    /*#[ORM\OneToMany(targetEntity: Incidencia::class, mappedBy: 'usuario', orphanRemoval: true)]
+    private Collection $incidencias;
+
+    public function __construct()
+    {
+        $this->incidencias = new ArrayCollection();
+    }*/
 
     public function getEmail(): ?string
     {
