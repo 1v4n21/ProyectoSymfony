@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticuloController!{% endblock %}
+{% block title %}Añadir Cliente{% endblock %}
 
 {% block body %}
 <style>
@@ -9,7 +9,10 @@
 </style>
 
 <div class="example-wrapper">
-{{form(formularioArticulo)}}
+    
+    {{ form(formularioCliente) }}
+
 </div>
 
+<a href="{{path('addCliente')}}">Nuevo cliente</a>
 {% endblock %}

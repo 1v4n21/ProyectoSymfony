@@ -53,13 +53,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    /*#[ORM\OneToMany(targetEntity: Incidencia::class, mappedBy: 'usuario', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Incidencia::class, mappedBy: 'usuario', orphanRemoval: true)]
     private Collection $incidencias;
 
     public function __construct()
     {
         $this->incidencias = new ArrayCollection();
-    }*/
+    }
 
     public function getEmail(): ?string
     {

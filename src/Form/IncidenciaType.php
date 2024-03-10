@@ -2,25 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Articulo;
-use App\Entity\Categoria;
+use App\Entity\Incidencia;
+use App\Entity\Cliente;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ArticuloType extends AbstractType
+class IncidenciaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nombre')
-            ->add('descripcion')
+            ->add('titulo')
             ->add('fechaCreacion')
-            ->add('categoria', EntityType::class, [
-                'class' => Categoria::class,
-'choice_label' => 'nombre',
+            ->add('estado')
+            ->add('cliente', EntityType::class, [
+                'class' => Cliente::class,
+                'choice_label' => 'nombre',
             ])
             ->add('Insertar', SubmitType::class)
         ;
@@ -29,7 +29,7 @@ class ArticuloType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Articulo::class,
+            'data_class' => Incidencia::class,
         ]);
     }
 }

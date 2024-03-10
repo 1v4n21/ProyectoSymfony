@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticuloController!{% endblock %}
+{% block title %}Añadir incidencia{% endblock %}
 
 {% block body %}
 <style>
@@ -9,9 +9,7 @@
 </style>
 
 <div class="example-wrapper">
-    {% for articulo in articulos %}
-        <div> <a href="{{path('verArticulo',{id: articulo.id}) }}">{{ articulo.nombre }} ({{ articulo.categoria.nombre}})</div>
-    {% endfor %}
+{{form(formularioIncidencia)}}
 </div>
 
 {% endblock %}

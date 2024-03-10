@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticuloController!{% endblock %}
+{% block title %}Ver incidencias{% endblock %}
 
 {% block body %}
 <style>
@@ -8,14 +8,10 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-
 <div class="example-wrapper">
-    <h1>{{ articulo.nombre }} </h1>
-    <h3>{{ articulo.categoria.nombre }}</h3>
-    <p>{{ articulo.descripcion }}</p>
-    <a href="{{ path('verArticulosPorCategoria',{id: articulo.categoria.id}) }}">volver</a>
+    {% for incidencia in incidencias %}
+        <div> <a href="{{path('verIncidencia',{id: incidencia.id}) }}">{{ incidencia.titulo }} ({{ incidencia.cliente.nombre}})</div>
+    {% endfor %}
 </div>
-
-
 
 {% endblock %}

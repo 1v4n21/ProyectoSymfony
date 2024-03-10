@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ver Incidencia{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+<div class="example-wrapper">
+    <h1>{{ incidencia.titulo }} </h1>
+    <h3>{{ incidencia.cliente.nombre }}</h3>
+    <p>{{ incidencia.estado }}</p>
+    <p>{{ incidencia.fechaCreacion }}</p>
+    <a href="{{ path('verIncidenciasPorCliente',{id: incidencia.cliente.id}) }}">volver</a>
+</div>
+
+{% endblock %}

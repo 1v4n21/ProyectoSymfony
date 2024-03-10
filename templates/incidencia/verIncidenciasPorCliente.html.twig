@@ -11,11 +11,11 @@
 <div class="example-wrapper">
     <h1>Hello World! ✅</h1>
 
-    {% for articulo in categoria.articulos %}
-        <div> <a href="{{path('verArticulo',{id: articulo.id}) }}">{{ articulo.nombre }}</div>
+    {% for incidencia in cliente.incidencias %}
+        <div> <a href="{{path('verIncidencia',{id: incidencia.id}) }}">{{ incidencia.titulo }}</div>
     {% endfor %}
     <br>
-    <a href="{{path("categorias")}}">Volver</a><br>
-    <a href="{{path("addArticulo",{id:categoria.id})}}">Añadir artículo a la categoría</a>
+    <a href="{{path("clientes")}}">Volver</a><br>
+    <a href="{{path("addIncidencia",{id:cliente.id})}}">Añadir incidencia al cliente</a>
 </div>
 {% endblock %}
