@@ -21,6 +21,19 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Manejar la carga de la imagen manualmente
+            $file = $form->get('foto')->getData();
+
+            if ($file) {
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+                // Mover el archivo al directorio especificado
+                $file->move($this->getParameter('files_directory'), $fileName);
+
+                // Guardar el nombre del archivo en la entidad
+                $user->setFoto($fileName);
+            }
+            
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -31,7 +44,7 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            
+
             // Flash message
             $this->addFlash('success', '¡Registro exitoso! Puedes iniciar sesión ahora como ' . $user->getEmail());
 

@@ -57,7 +57,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-             ->add('foto',FileType::class)
+            ->add('foto',FileType::class)
         ;
     }
 

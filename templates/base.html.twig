@@ -28,6 +28,11 @@
             padding: 20px 0;
             font-size: 24px;
         }
+
+        .centered-heading {
+            text-align: center;
+            margin-top: 100px; /* Ajusta la distancia desde la parte superior según tus necesidades */
+        }
     </style>
     {% endblock %}
 
@@ -50,15 +55,42 @@
     </script>
     {% endfor %}
 
-    <header>
-        {% if app.user %}
+    {% if app.user %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+
+            <img src="{{ asset('images/' ~ app.user.foto) }}" alt="Foto de perfil" class="mr-2 rounded-circle"
+                style="width: 50px; height: 50px;">
             {{ app.user.nombre }}
-            <img src="{{ app.user.foto }}" alt="Imagen">
-        {% else %}
-            INCIDENCIAS
-        {% endif %}
-    </header>
-    
+        </a>
+
+        <!-- Botón para colapsar la barra de navegación en pantallas pequeñas -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Elementos de navegación -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Incidencias</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% else %}
+    <div class="container">
+        <h1 class="centered-heading">PAGINA WEB INCIDENCIAS</h1>
+    </div>
+    {% endif %}
+
     {% block body %}{% endblock %}
 </body>
 

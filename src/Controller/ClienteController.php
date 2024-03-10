@@ -16,7 +16,8 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 class ClienteController extends AbstractController
 {
-    #[Route('/', name: 'clientes')]
+    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
+    #[Route('/clientes', name: 'clientes')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $clientes = $entityManager->getRepository(Cliente::class)->findAll();
@@ -25,7 +26,7 @@ class ClienteController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder como admin')]
+    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
     #[Route('/cliente/add', name: 'addCliente')]
     public function addCliente(EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -55,6 +56,7 @@ class ClienteController extends AbstractController
         return $this->render('cliente/addCliente.html.twig', ['formularioCliente'=>$formularioCliente]);        
     }
 
+    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
     #[Route('/cliente/delete/{id}', name: 'deleteCliente')]
     public function deleteCliente(Cliente $cliente, EntityManagerInterface $entityManager): Response
     {

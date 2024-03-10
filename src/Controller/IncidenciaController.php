@@ -10,9 +10,11 @@ use App\Entity\Cliente;
 use App\Form\IncidenciaType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class IncidenciaController extends AbstractController
 {
+    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
     #[Route('/incidencias/{id}', name: 'verIncidencia')]
     public function verIncidencia(Incidencia $incidencia): Response
     {
@@ -21,6 +23,7 @@ class IncidenciaController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
     #[Route('/incidencias', name: 'verTodosIncidencias')]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -31,14 +34,16 @@ class IncidenciaController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
     #[Route('/incidencias/cliente/{id}', name: 'verIncidenciasPorCliente')]
-    public function verIncidenciasPorCategoria(Cliente $cliente): Response
+    public function verIncidenciasPorCliente(Cliente $cliente): Response
     {
         return $this->render('incidencia/verIncidenciasPorCliente.html.twig', [
             'cliente' => $cliente
         ]);
     }
 
+    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
     #[Route('/incidencia/add/{id}', name: 'addIncidencia')]
     public function addIncidencia(EntityManagerInterface $entityManager, Request $request, int $id): Response
     {
