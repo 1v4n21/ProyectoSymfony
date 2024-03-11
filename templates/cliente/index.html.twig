@@ -4,18 +4,64 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    h1{
+        color: #007bff;
+    }
+
+    .container-center {
+        text-align: center;
+    }
+
+    .cliente-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .cliente-item {
+        margin-bottom: 1em;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 1em;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
+
+    .cliente-item:hover {
+        background-color: rgba(255, 255, 255, 1);
+    }
+
+    .cliente-actions {
+        margin-left: 1em;
+    }
+
+    .btn-nuevo-cliente {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+    .btn-borrar {
+        background-color: #dc3545;
+        color: #fff;
+    }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello World! ✅</h1>
+<div class="container mt-4 container-center">
+    <h1>Listado de Clientes</h1>
 
-    {% for cliente in clientes %}
-        <div> <a href="{{path('verIncidenciasPorCliente',{id: cliente.id}) }}">{{ cliente.nombre }} 
-        <a href="{{path('deleteCliente',{id: cliente.id}) }}">(borrar)</a></div>
-    {% endfor %}
+    <br>
+
+    <div class="cliente-list">
+        {% for cliente in clientes %}
+        <div class="cliente-item">
+            <a href="{{ path('verIncidenciasPorCliente', { id: cliente.id }) }}">{{ cliente.nombre }}</a>
+            <span class="cliente-actions">
+                <a href="{{ path('deleteCliente', { id: cliente.id }) }}" class="btn btn-borrar">borrar</a>
+            </span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <a href="{{ path('addCliente') }}" class="btn btn-nuevo-cliente">Nuevo cliente</a>
 </div>
-
-<a href="{{path('addCliente')}}">Nuevo cliente</a>
 {% endblock %}

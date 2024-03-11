@@ -31,7 +31,8 @@
 
         .centered-heading {
             text-align: center;
-            margin-top: 100px; /* Ajusta la distancia desde la parte superior según tus necesidades */
+            margin-top: 100px;
+            /* Ajusta la distancia desde la parte superior según tus necesidades */
         }
     </style>
     {% endblock %}
@@ -57,8 +58,7 @@
 
     {% if app.user %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-
+        <a class="navbar-brand" href="{{ path('clientes') }}">
             <img src="{{ asset('images/' ~ app.user.foto) }}" alt="Foto de perfil" class="mr-2 rounded-circle"
                 style="width: 50px; height: 50px;">
             {{ app.user.nombre }}
@@ -74,14 +74,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Inicio</a>
+                    <a class="nav-link" href="{{ path('clientes') }}">Clientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Clientes</a>
+                    <a class="nav-link" href="{{ path('verTodosIncidencias') }}">Incidencias</a>
                 </li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Incidencias</a>
-                </li>
+                    <a class="nav-link btn btn-danger" href="{{ path('app_logout') }}">Cerrar Sesión</a>
+                </li>                
             </ul>
         </div>
     </nav>

@@ -13,7 +13,7 @@
     <h1>{{ incidencia.titulo }} </h1>
     <h3>{{ incidencia.cliente.nombre }}</h3>
     <p>{{ incidencia.estado }}</p>
-    <p>{{ incidencia.fechaCreacion }}</p>
+    <p>{{ incidencia.fechaCreacion|date('Y-m-d H:i:s') }}</p>
     <a href="{{ path('verIncidenciasPorCliente',{id: incidencia.cliente.id}) }}">volver</a>
 </div>
 

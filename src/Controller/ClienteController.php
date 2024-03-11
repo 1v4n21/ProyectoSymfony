@@ -33,10 +33,18 @@ class ClienteController extends AbstractController
         
         $cliente =new Cliente();
         $formularioCliente = $this->createFormBuilder($cliente)
-           ->add('nombre',TextType::class)
-           ->add('apellidos',TextareaType::class)
-           ->add('telefono',TelType::class)
-           ->add('direccion',TextareaType::class)
+           ->add('nombre',TextType::class, [
+                'required' => true,
+           ])
+           ->add('apellidos',TextareaType::class, [
+                'required' => false,
+           ])
+           ->add('telefono',TelType::class, [
+                'required' => true,
+           ])
+           ->add('direccion',TextareaType::class, [
+                'required' => false,
+           ])
            ->add('Insertar',SubmitType::class, ['label'=>'Insertar'])
            ->getForm();
 

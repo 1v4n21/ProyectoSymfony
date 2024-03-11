@@ -1,3 +1,7 @@
 body {
-    background-color: skyblue;
+    background-color: #87CEEB; /* Usa cualquier código de color hexadecimal que te guste */
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0; /* Elimina el margen predeterminado del cuerpo */
+    padding: 0; /* Elimina el relleno predeterminado del cuerpo */
 }

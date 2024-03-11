@@ -4,18 +4,107 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .cliente-details {
+        text-align: center;
+        padding: 2em;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
+
+    .cliente-details h1 {
+        margin-bottom: 1em;
+        color: #007bff;
+    }
+
+    .cliente-details p {
+        font-size: 1.2em;
+        margin-bottom: 1em;
+    }
+
+    .incidencia-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .incidencia-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1em;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 1em;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+        color: black;
+    }
+
+    .incidencia-item:hover {
+        background-color: rgba(255, 255, 255, 1);
+    }
+
+    .incidencia-actions {
+        display: flex;
+        gap: 1em;
+    }
+
+    .btn-editar,
+    .btn-borrar {
+        padding: 0.5em 1em;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-editar {
+        background-color: #ffc107;
+        color: #343a40;
+    }
+
+    .btn-borrar {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .btn-add-incidencia {
+        margin-top: 1em;
+        padding: 0.75em 1.5em;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 4px;
+        background-color: #28a745;
+        color: #fff;
+        transition: background-color 0.3s;
+    }
+
+    .btn-add-incidencia:hover {
+        background-color: #218838;
+    }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello World! ✅</h1>
+<div class="cliente-details">
+    <h1>{{ cliente.nombre }} - Detalles del Cliente</h1>
+    <p>Apellidos: {{ cliente.apellidos }}</p>
+    <p>Teléfono: {{ cliente.telefono }}</p>
+    <p>Dirección: {{ cliente.direccion }}</p>
 
-    {% for incidencia in cliente.incidencias %}
-        <div> <a href="{{path('verIncidencia',{id: incidencia.id}) }}">{{ incidencia.titulo }}</div>
-    {% endfor %}
     <br>
-    <a href="{{path("clientes")}}">Volver</a><br>
-    <a href="{{path("addIncidencia",{id:cliente.id})}}">Añadir incidencia al cliente</a>
+
+    <ul class="incidencia-list">
+        {% for incidencia in cliente.incidencias %}
+        <li class="incidencia-item">
+            <div>{{ incidencia.titulo }}</div>
+            <div class="incidencia-actions">
+                <a href="{{ path('verIncidencia', { id: incidencia.id }) }}" class="btn btn-editar">Ver</a>
+                <a href="{{ path('verIncidencia', { id: incidencia.id }) }}" class="btn btn-editar">Editar</a>
+                <a href="{{ path('verIncidencia', { id: incidencia.id }) }}" class="btn btn-borrar">Borrar</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <br>
+
+    <a href="{{ path('addIncidencia', { id: cliente.id }) }}" class="btn btn-add-incidencia">Añadir incidencia</a>
 </div>
 {% endblock %}
