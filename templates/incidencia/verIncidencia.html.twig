@@ -4,17 +4,41 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .card {
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
+        background-color: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        color: #495057;
+    }
+
+    h1, h3, p {
+        margin-bottom: 10px;
+    }
+
+    a {
+        color: #007bff;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
 </style>
 
+<br>
 
-<div class="example-wrapper">
-    <h1>{{ incidencia.titulo }} </h1>
-    <h3>{{ incidencia.cliente.nombre }}</h3>
-    <p>{{ incidencia.estado }}</p>
-    <p>{{ incidencia.fechaCreacion|date('Y-m-d H:i:s') }}</p>
-    <a href="{{ path('verIncidenciasPorCliente',{id: incidencia.cliente.id}) }}">volver</a>
+<div class="card">
+    <h1 class="display-4">{{ incidencia.titulo }}</h1>
+    <h3 class="lead">Cliente: {{ incidencia.cliente.nombre }}</h3>
+    <p class="lead">Estado: {{ incidencia.estado }}</p>
+    <p class="lead">Fecha de Creación: {{ incidencia.fechaCreacion|date('Y-m-d H:i:s') }}</p>
+    <p class="lead">Usuario encargado: {{incidencia.usuario.nombre}}</p>
+    <a class="btn btn-link" href="{{ path('verIncidenciasPorCliente',{id: incidencia.cliente.id}) }}">Volver</a>
 </div>
-
 {% endblock %}
+
+

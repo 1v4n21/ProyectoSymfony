@@ -3,15 +3,28 @@
 {% block title %}Ver incidencias{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-        <h1>Lista de Incidencias</h1>
-        <br><br>
-        <div class="list-group">
-            {% for incidencia in incidencias %}
-                <a href="{{ path('verIncidencia', { id: incidencia.id }) }}" class="list-group-item list-group-item-action">
-                    {{ incidencia.titulo }} ({{ incidencia.cliente.nombre }})
-                </a>
-            {% endfor %}
-        </div>
+<style>
+    h1 {
+        color: #007bff;
+    }
+</style>
+
+<div class="container mt-4">
+    <h1>Lista de Incidencias</h1>
+    <br><br>
+    <div class="list-group">
+        {% for incidencia in incidencias %}
+            {# Utilizar clases de fondo de Bootstrap directamente #}
+            {% set backgroundColorClass = 
+                incidencia.estado == 'Resuelta' ? 'bg-success' : 
+                incidencia.estado == 'En Proceso' ? 'bg-warning' : 
+                incidencia.estado == 'Iniciada' ? 'bg-light' : ''
+            %}
+
+            <a href="{{ path('verIncidencia', { id: incidencia.id }) }}" class="list-group-item list-group-item-action {{ backgroundColorClass }}">
+                {{ incidencia.titulo }} ({{ incidencia.cliente.nombre }}) - {{ incidencia.fechaCreacion|date('Y-m-d H:i:s') }}
+            </a>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

@@ -45,7 +45,6 @@ class ClienteController extends AbstractController
            ->add('direccion',TextareaType::class, [
                 'required' => false,
            ])
-           ->add('Insertar',SubmitType::class, ['label'=>'Insertar'])
            ->getForm();
 
 

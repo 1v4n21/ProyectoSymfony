@@ -1,76 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Añadir incidencia{% endblock %}
+{% block title %}Añadir Incidencia{% endblock %}
 
 {% block body %}
 <style>
-    .form-wrapper {
-        text-align: center;
-        padding: 2em;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: background-color 0.3s, box-shadow 0.3s;
-    }
-
-    .form-title {
-        margin-bottom: 1em;
-        color: #007bff; /* Azul brillante para resaltar */
-    }
-
-    .form-group {
-        margin-bottom: 1em;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 0.5em;
-        border: 1px solid #ced4da;
-        border-radius: 4px;
-        background-color: #f8f9fa;
-    }
-
-    .form-control:focus {
-        border-color: #007bff;
-    }
-
-    .btn-submit {
-        padding: 0.75em 1.5em;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 4px;
-        background-color: #28a745;
-        color: #fff;
-        transition: background-color 0.3s;
-    }
-
-    .btn-submit:hover {
-        background-color: #218838;
-    }
-
-    .btn-volver {
-        display: inline-block;
-        margin-top: 1em;
-        padding: 0.75em 1.5em;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 4px;
-        background-color: #007bff;
-        color: #fff;
-        transition: background-color 0.3s;
-    }
-
-    .btn-volver:hover {
-        background-color: #0056b3;
+    h1 {
+        color: #007bff;
     }
 </style>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">Registro de Incidencia</h1>
 
-<div class="form-wrapper">
-    <h1 class="form-title">Añadir Incidencia</h1>
+            {{ form_errors(formularioIncidencia) }}
 
-    {{ form(formularioIncidencia) }}
+            {{ form_start(formularioIncidencia) }}
+            <div class="mb-3">
+                {{ form_row(formularioIncidencia.titulo, {'attr': {'class': 'form-control', 'placeholder': 'Título'}})
+                }}
+            </div>
 
-    <a href="{{ path('clientes') }}" class="btn btn-volver">Volver</a>
+            <div class="mb-3">
+                {{ form_row(formularioIncidencia.fechaCreacion, {'attr': {'class': 'form-control', 'placeholder': 'Fecha
+                de Creación'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_row(formularioIncidencia.estado, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-check mb-3">
+                {{ form_row(formularioIncidencia.cliente, {'attr': {'class': 'form-check-input'}}) }}
+                <label class="form-check-label" for="{{ formularioIncidencia.cliente.vars.id }}">
+                </label>
+            </div>
+
+            <br>
+
+            <button type="submit" class="btn btn-primary">Registrar Incidencia</button>
+            {{ form_end(formularioIncidencia) }}
+
+            <br>
+
+        </div>
+    </div>
 </div>
 {% endblock %}
-
-

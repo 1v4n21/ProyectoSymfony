@@ -4,15 +4,40 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    h1{
+        color: #007bff;
+    }
 </style>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Registro de Cliente</h1>
 
-<div class="example-wrapper">
-    
-    {{ form(formularioCliente) }}
+                {{ form_errors(formularioCliente) }}
 
-</div>
+                {{ form_start(formularioCliente) }}
+                    <div class="mb-3">
+                        {{ form_row(formularioCliente.nombre, {'attr': {'class': 'form-control', 'placeholder': 'Nombre'}}) }}
+                    </div>
 
-<a href="{{path('addCliente')}}">Nuevo cliente</a>
+                    <div class="mb-3">
+                        {{ form_row(formularioCliente.apellidos, {'attr': {'class': 'form-control', 'placeholder': 'Apellidos'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(formularioCliente.telefono, {'attr': {'class': 'form-control', 'placeholder': 'Teléfono'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(formularioCliente.direccion, {'attr': {'class': 'form-control', 'placeholder': 'Dirección'}}) }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Registrar Cliente</button>
+                {{ form_end(formularioCliente) }}
+
+                <br>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

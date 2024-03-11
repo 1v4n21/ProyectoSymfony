@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoriaController!{% endblock %}
+{% block title %}Datos cliente{% endblock %}
 
 {% block body %}
 <style>
@@ -80,13 +80,35 @@
     .btn-add-incidencia:hover {
         background-color: #218838;
     }
+
+    .card {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: black;
+    }
+
+    h1 {
+        color: #007bff;
+    }
+
+    p {
+        margin: 10px 0;
+    }
 </style>
 
 <div class="cliente-details">
     <h1>{{ cliente.nombre }} - Detalles del Cliente</h1>
-    <p>Apellidos: {{ cliente.apellidos }}</p>
-    <p>Teléfono: {{ cliente.telefono }}</p>
-    <p>Dirección: {{ cliente.direccion }}</p>
+
+    <div class="card">
+        <p>Apellidos: {{ cliente.apellidos }}</p>
+        <p>Teléfono: {{ cliente.telefono }}</p>
+        <p>Dirección: {{ cliente.direccion }}</p>
+    </div>
 
     <br>
 
