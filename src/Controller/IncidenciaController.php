@@ -24,10 +24,29 @@ class IncidenciaController extends AbstractController
     }
 
     #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
+    #[Route('/incidencia/delete/{id}', name: 'deleteIncidencia')]
+    public function deleteIncidencia(Request $request, Incidencia $incidencia, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($incidencia);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Incidencia para ' . $incidencia->getCliente()->getNombre() . ' eliminada con éxito');
+
+
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
     #[Route('/incidencias', name: 'verTodosIncidencias')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $incidencias = $entityManager->getRepository(Incidencia::class)->findAll();
+        $repository = $entityManager->getRepository(Incidencia::class);
+
+        // Utiliza QueryBuilder para ordenar por fecha en orden inverso
+        $incidencias = $repository->createQueryBuilder('i')
+            ->orderBy('i.fechaCreacion', 'DESC')
+            ->getQuery()
+            ->getResult();
 
         return $this->render('incidencia/index.html.twig', [
             'incidencias' => $incidencias
@@ -63,13 +82,44 @@ class IncidenciaController extends AbstractController
    
             $entityManager->persist($incidencia);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Incidencia para ' . $incidencia->getCliente()->getNombre() . ' creada con éxito');
+
    
             return $this->redirectToRoute('verIncidenciasPorCliente',['id' => $id]);
            }
 
 
         return $this->render('incidencia/addIncidencia.html.twig', ['formularioIncidencia'=>$formularioIncidencia]);
+    }
 
-        
+    #[IsGranted('ROLE_USER', message: 'No tienes permisos para acceder')]
+    #[Route('/incidencia/edit/{id}', name: 'editIncidencia')]
+    public function editIncidencia(EntityManagerInterface $entityManager, Request $request, int $id): Response
+    {
+        $incidencia = $entityManager->getRepository(Incidencia::class)->find($id);
+
+        if (!$incidencia) {
+            throw $this->createNotFoundException('No se encontró la incidencia con el id ' . $id);
+        }
+
+        $formularioIncidencia = $this->createForm(IncidenciaType::class, $incidencia);
+
+        $formularioIncidencia->handleRequest($request);
+
+        if ($formularioIncidencia->isSubmitted() && $formularioIncidencia->isValid()) {
+            // Puedes agregar lógica adicional si es necesario
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Incidencia para ' . $incidencia->getCliente()->getNombre() . ' editada con éxito');
+
+
+            return $this->redirectToRoute('verIncidenciasPorCliente', ['id' => $incidencia->getCliente()->getId()]);
+        }
+
+        return $this->render('incidencia/addIncidencia.html.twig', [
+            'formularioIncidencia' => $formularioIncidencia->createView(),
+        ]);
     }
 }

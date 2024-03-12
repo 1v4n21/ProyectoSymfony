@@ -20,9 +20,9 @@ class IncidenciaType extends AbstractType
         ->add('fechaCreacion')
         ->add('estado', ChoiceType::class, [
             'choices' => [
-                'Iniciada' => 'iniciada',
-                'En Proceso' => 'en_proceso',
-                'Resuelta' => 'resuelta',
+                'Iniciada' => 'Iniciada',
+                'En Proceso' => 'En proceso',
+                'Resuelta' => 'Resuelta',
             ],
             'expanded' => true,
             'multiple' => false, 

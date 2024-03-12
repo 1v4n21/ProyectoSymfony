@@ -37,7 +37,7 @@
     <p class="lead">Estado: {{ incidencia.estado }}</p>
     <p class="lead">Fecha de Creación: {{ incidencia.fechaCreacion|date('Y-m-d H:i:s') }}</p>
     <p class="lead">Usuario encargado: {{incidencia.usuario.nombre}}</p>
-    <a class="btn btn-link" href="{{ path('verIncidenciasPorCliente',{id: incidencia.cliente.id}) }}">Volver</a>
+    <a class="btn btn-link" href="{{ app.session.get('ultima_ruta')|default(path('verTodosIncidencias')) }}">Volver</a>
 </div>
 {% endblock %}
 

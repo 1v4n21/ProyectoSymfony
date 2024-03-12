@@ -118,8 +118,8 @@
             <div>{{ incidencia.titulo }}</div>
             <div class="incidencia-actions">
                 <a href="{{ path('verIncidencia', { id: incidencia.id }) }}" class="btn btn-editar">Ver</a>
-                <a href="{{ path('verIncidencia', { id: incidencia.id }) }}" class="btn btn-editar">Editar</a>
-                <a href="{{ path('verIncidencia', { id: incidencia.id }) }}" class="btn btn-borrar">Borrar</a>
+                <a href="{{ path('editIncidencia', { id: incidencia.id }) }}" class="btn btn-editar">Editar</a>
+                <a href="{{ path('deleteIncidencia', { id: incidencia.id }) }}" class="btn btn-borrar">Borrar</a>
             </div>
         </li>
         {% endfor %}

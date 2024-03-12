@@ -55,6 +55,9 @@ class ClienteController extends AbstractController
    
             $entityManager->persist($cliente);
             $entityManager->flush();
+
+            // Flash message
+            $this->addFlash('success', 'Cliente ' . $cliente->getNombre() . ' creado con éxito');
    
             return $this->redirectToRoute('clientes');
            }
@@ -70,8 +73,10 @@ class ClienteController extends AbstractController
         $entityManager->remove($cliente);
         $entityManager->flush();
 
+        $this->addFlash('success', 'Cliente ' . $cliente->getNombre() . ' eliminado con éxito');
+
+
         return $this->redirectToRoute('clientes');
-        
     }
  
 }
